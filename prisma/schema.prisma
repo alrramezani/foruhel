@@ -1,0 +1,56 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Portfolio {
+  name      String // Portfolio owner's name
+  email     String   @unique // Owner's email (acts as a unique identifier)
+  password  String
+  avatarUrl String? // Profile picture URL
+  bio       String? // Short "About Me" section
+  updatedAt DateTime @updatedAt
+}
+
+model Project {
+  id           Int      @id @default(autoincrement())
+  title        String
+  description  String?
+  imageUrl     String?
+  projectUrl   String?
+  technologies String[] // Array of technologies used in the project
+}
+
+model Skill {
+  id    Int     @id @default(autoincrement())
+  name  String // Skill name
+  level String? // e.g., Beginner, Intermediate, Advanced
+}
+
+model Experience {
+  id          Int       @id @default(autoincrement())
+  companyName String
+  position    String
+  startDate   DateTime
+  endDate     DateTime?
+  description String?
+}
+
+model Education {
+  id           Int       @id @default(autoincrement())
+  institution  String
+  degree       String
+  fieldOfStudy String
+  startDate    DateTime
+  endDate      DateTime?
+}
+
+model SocialLink {
+  id       Int    @id @default(autoincrement())
+  platform String // e.g., LinkedIn, GitHub, Twitter
+  url      String
+}
