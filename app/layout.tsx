@@ -1,6 +1,6 @@
 "use client";
 import { ReactNode } from "react";
-
+import "./globals.css";
 interface RootLayoutProps {
   children: ReactNode;
 }

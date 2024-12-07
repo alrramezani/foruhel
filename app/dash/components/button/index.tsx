@@ -8,7 +8,7 @@ type ButtonProps = {
 };
 
 const Button: React.FC<ButtonProps> = ({
-  type = "button",
+  type = "submit",
   label,
   variant = "primary",
   onClick,
