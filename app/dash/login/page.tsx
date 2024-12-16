@@ -1,13 +1,13 @@
 "use client";
-import { useState } from "react";
+import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useFormik } from "formik";
 import Input from "@/app/dash/components/input";
 import Button from "@/app/dash/components/button";
-
+import useAuth from "@/app/hooks/requests/useAuth";
 export default function Login() {
   const router = useRouter();
-  const [error, setError] = useState("");
+  const login = useAuth();
   const validate = () => {
     const errors: { username?: string; password?: string } = {};
     const values = formik.values;
@@ -28,21 +28,14 @@ export default function Login() {
     },
     validate: validate,
     onSubmit: (values) => {
-      handleLogin(values);
+      login.mutate(values);
     },
   });
-  const handleLogin = async (values: unknown) => {
-    const res = await fetch("/api/auth/login", {
-      method: "POST",
-      body: JSON.stringify(values),
-      headers: { "Content-Type": "application/json" },
-    });
-    if (res.ok) {
+  useEffect(() => {
+    if (login.isSuccess) {
       router.push("/dash");
-    } else {
-      setError("Invalid credentials");
     }
-  };
+  }, [login.isSuccess, router]);
 
   return (
     <div className="flex justify-center items-center w-full h-svh">
@@ -76,7 +69,9 @@ export default function Login() {
             </p>
           )}
           <Button label="Login" />
-          {error && <p className="text-red-600 mb-2 text-xs">{error}</p>}
+          {login.error && (
+            <p className="text-red-600 mb-2 text-xs">{login.error.message}</p>
+          )}
         </form>
       </div>
     </div>
