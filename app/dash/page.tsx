@@ -1,5 +1,5 @@
+"use client"
 import { IoSettingsOutline } from "react-icons/io5";
-
 const today = () => {
   const now = new Date();
   return new Intl.DateTimeFormat("en-US", {
@@ -12,6 +12,7 @@ const today = () => {
 // Format the date
 
 export default function DashPage() {
+  
   return (
     <div className="container px-4 md:px-16">
       <header className="pt-4 md:pt-8">
