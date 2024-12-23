@@ -1,5 +1,7 @@
-"use client"
-import { IoSettingsOutline } from "react-icons/io5";
+"use client";
+import { HiOutlineDocument } from "react-icons/hi";
+import Drawer from "@/app/dash/components/drawer";
+import { useState } from "react";
 const today = () => {
   const now = new Date();
   return new Intl.DateTimeFormat("en-US", {
@@ -9,22 +11,30 @@ const today = () => {
     year: "numeric", // Full year (e.g., 2024)
   }).format(now);
 };
-// Format the date
 
 export default function DashPage() {
-  
+  const [drawerStatus, setDrawerStatus] = useState(false);
+  const toggleDrawer = () => {
+    setDrawerStatus(!drawerStatus);
+  };
   return (
-    <div className="container px-4 md:px-16">
-      <header className="pt-4 md:pt-8">
-        <div className="flex justify-between items-center">
-          <div>
-            <h1 className="text-2xl md:text-4xl">Hi, Alireza</h1>
-            <span className="text-[10px] opacity-60">{today()}</span>
+    <>
+      <div className="container mx-auto px-4 md:px-16">
+        <header className="pt-4 md:pt-8">
+          <div className="flex justify-between items-center">
+            <div>
+              <h1 className="text-2xl md:text-4xl">Hi, Alireza</h1>
+              <span className="text-[10px] opacity-60">{today()}</span>
+            </div>
+            <HiOutlineDocument
+              className="text-2xl cursor-pointer"
+              onClick={toggleDrawer}
+            />
           </div>
-          <IoSettingsOutline className="text-xl cursor-pointer" />
-        </div>
-      </header>
-      <main></main>
-    </div>
+        </header>
+        <main></main>
+      </div>
+      <Drawer isOpen={drawerStatus} toggle={toggleDrawer}>child</Drawer>
+    </>
   );
 }
