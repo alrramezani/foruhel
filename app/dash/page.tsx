@@ -2,6 +2,7 @@
 import { HiOutlineDocument } from "react-icons/hi";
 import Drawer from "@/app/dash/components/drawer";
 import { useState } from "react";
+import Card from "./components/card";
 const today = () => {
   const now = new Date();
   return new Intl.DateTimeFormat("en-US", {
@@ -32,7 +33,9 @@ export default function DashPage() {
             />
           </div>
         </header>
-        <main></main>
+        <main>
+          <Card>hi</Card>
+        </main>
       </div>
       <Drawer isOpen={drawerStatus} toggle={toggleDrawer}>child</Drawer>
     </>

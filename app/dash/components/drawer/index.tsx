@@ -19,7 +19,7 @@ const Drawer: React.FC<DrawerProps> = ({ isOpen, toggle, children }) => {
       )}
 
       <div
-        className={`fixed top-0 right-0 h-full w-1/2 bg-inherit shadow-lg transform transition-transform duration-300 ${
+        className={`fixed top-0 right-0 h-full w-full md:w-2/3 bg-inherit shadow-lg transform transition-transform duration-300 ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
         data-testid="drawer"
